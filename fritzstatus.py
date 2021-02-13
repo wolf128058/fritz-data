@@ -181,31 +181,3 @@ def print_status(address=fritzconnection.FRITZ_IP_ADDRESS,
         ('max. bit rate:', fs.str_max_bit_rate)
         ]).items():
         print('{:<20}{}'.format(status, info))
-
-
-# ---------------------------------------------------------
-# cli-section:
-# ---------------------------------------------------------
-
-def _get_cli_arguments():
-    parser = argparse.ArgumentParser(description='FritzBox Status')
-    parser.add_argument('-i', '--ip-address',
-                        nargs='?', default=fritzconnection.FRITZ_IP_ADDRESS,
-                        dest='address',
-                        help='ip-address of the FritzBox to connect to. '
-                             'Default: %s' % fritzconnection.FRITZ_IP_ADDRESS)
-    parser.add_argument('--port',
-                        nargs='?', default=fritzconnection.FRITZ_TCP_PORT,
-                        dest='port',
-                        help='port of the FritzBox to connect to. '
-                             'Default: %s' % fritzconnection.FRITZ_TCP_PORT)
-    args = parser.parse_args()
-    return args
-
-
-def _print_status(arguments):
-    print_status(address=arguments.address, port=arguments.port)
-
-
-if __name__ == '__main__':
-    _print_status(_get_cli_arguments())
