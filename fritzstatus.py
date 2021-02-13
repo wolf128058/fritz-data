@@ -31,12 +31,8 @@ class FritzStatus(object):
     """
 
     def __init__(self,
-                 fc=None,
-                 address=fritzconnection.FRITZ_IP_ADDRESS,
-                 port=fritzconnection.FRITZ_TCP_PORT):
+                 fc):
         super(FritzStatus, self).__init__()
-        if fc is None:
-            fc = fritzconnection.FritzConnection(address=address, port=port)
         self.fc = fc
         self.last_bytes_sent = self.bytes_sent
         self.last_bytes_received = self.bytes_received
@@ -165,11 +161,10 @@ class FritzStatus(object):
 # terminal-output:
 # ---------------------------------------------------------
 
-def print_status(address=fritzconnection.FRITZ_IP_ADDRESS,
-                 port=fritzconnection.FRITZ_TCP_PORT):
+def print_status(fc):
     print('\nFritzStatus:')
     print('{:<20}{}'.format('version:', get_version()))
-    fs = FritzStatus(address=address, port=port)
+    fs = FritzStatus(fc)
     for status, info in collections.OrderedDict([
         ('model:', fs.modelname),
         ('is linked:', fs.is_linked),
