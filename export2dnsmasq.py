@@ -37,7 +37,7 @@ if ARGS.password is None:
     ARGS.password = getpass('Your Fritzbox-Password:')
 
 try:
-    F_CONN = FritzConnection(address=ARGS.host, password=ARGS.password)
+    F_CONN = FritzConnection(address=ARGS.host, password=ARGS.password, use_tls=True)
 except OSError:
     print('Could not connect to Fritzbox. I quit.')
     exit()
